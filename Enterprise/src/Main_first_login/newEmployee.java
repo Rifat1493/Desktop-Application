@@ -7,16 +7,28 @@ package Main_first_login;
 
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -24,55 +36,45 @@ import javafx.stage.Stage;
  *
  * @author Rifat
  */
-public class newEmployee {
+public class newEmployee implements Initializable{
  @FXML   
-   private TextField employeeID;
-
+   private TextField EmployeeID;
 @FXML
-    private TextField employeeName;
+    private TextField Employeename;
 
-@FXML
-    private TextField designation;
+@FXML  private ComboBox<String> Designation;
 
-@FXML
-    private TextField branchName;
-@FXML
-    private TextField enrollment;
+@FXML private ComboBox<String> Branchname;
+@FXML private  DatePicker Enrollment;
 
-@FXML
-    private TextField contact;
+@FXML private TextField Contact;
+@FXML private TextField Salary;
 
-@FXML private TextField salary;
-
-
+ ObservableList <String> listdesig = FXCollections.observableArrayList("Manager","Asst manager","Administrator","Worker"); 
+ // should retriev from database
+  ObservableList <String> listbran ;
 
 
 
 
  @FXML
     void handleButtonAction(ActionEvent event) {
-     
       try{
  
-            Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/Employee","root","besimple0");
-         
-            PreparedStatement mystat=null ;
-          
-        mystat = myconn.prepareStatement("insert into employeeinfo(EmployeeID,EmployeeName,Designation,Branchname,Enrollment,Contact,Salary) values(?,?,?,?,?,?,?)");
-       
-       mystat.setString(1,employeeID.getText());
-       mystat.setString(2,employeeName.getText());
-       mystat.setString(3,designation.getText());
-       mystat.setString(4,branchName.getText());
-       mystat.setString(5,enrollment.getText());
-       mystat.setString(6,contact.getText()); 
-     //  mystat.setDouble(7,Double.parseDouble(salary.getText()));System.out.println("hello");
-     Float ab= Float.parseFloat(salary.getText());  
+            Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+         PreparedStatement mystat=null ;
+         String datevalue=Date.valueOf(Enrollment.getValue()).toString();
+         mystat = myconn.prepareStatement("insert into employee(EmployeeID,Employeename,Designation,Branchname,Enrollment,Contact,Salary) values(?,?,?,?,?,?,?)");
+       mystat.setString(1,EmployeeID.getText());
+       mystat.setString(2,Employeename.getText());
+       mystat.setString(3,Designation.getValue());
+       mystat.setString(4,Branchname.getValue());
+       mystat.setString(5,datevalue);
+       mystat.setString(6,Contact.getText()); 
+      Float ab= Float.parseFloat(Salary.getText());  
        mystat.setFloat(7,ab);
         mystat.executeUpdate();
-   
 
-        
       }
        catch(SQLException e){
            System.out.println(e);
@@ -89,4 +91,30 @@ public class newEmployee {
         main_stage.show();
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+       Designation.setItems(listdesig);
+       
+         try{  Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+          Statement mystat=myconn.createStatement();
+          ResultSet  rs=mystat.executeQuery("select Branchname from login");
+      List<String> list=new ArrayList<String>();
+                while (rs.next()) {
+                  
+                    String current = rs.getString(1);
+                    list.add(current);
+               
+      }
+               listbran= FXCollections.observableArrayList(list);
+                    Branchname.getItems().addAll(listbran);
+         
+         }
+       catch(SQLException e){
+           System.out.println(e);
+       } 
+         
+    
+
 }
+    }
+

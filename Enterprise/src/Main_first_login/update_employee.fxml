@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.Update_employeeController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.Update_employeeController">
    <children>
       <AnchorPane layoutX="21.0" layoutY="1.0" prefHeight="728.0" prefWidth="1366.0">
          <children>
@@ -40,20 +42,20 @@
                   <Font name="Segoe UI Semibold" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="EmployeeName" layoutX="623.0" layoutY="212.0" onAction="#handleButtonAction" />
-            <TextField fx:id="EmployeeID" layoutX="426.0" layoutY="161.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="294.0" />
-            <TextField fx:id="Designation" layoutX="623.0" layoutY="267.0" onAction="#handleButtonAction" />
-            <TextField fx:id="Branchname" layoutX="623.0" layoutY="321.0" onAction="#handleButtonAction" />
-            <TextField fx:id="Enrollment" layoutX="623.0" layoutY="372.0" onAction="#handleButtonAction" />
-            <TextField fx:id="Contact" layoutX="623.0" layoutY="419.0" onAction="#handleButtonAction" />
-            <TextField fx:id="Salary" layoutX="623.0" layoutY="468.0" onAction="#handleButtonAction" />
-            <JFXButton fx:id="insert_employee" buttonType="RAISED" layoutX="426.0" layoutY="554.0" prefHeight="25.0" prefWidth="90.0" style="-fx-border-color: #24c518; -fx-cursor: hand;" text="Confirm">
+            <TextField fx:id="Employeename" layoutX="623.0" layoutY="212.0" onAction="#handleButtonAction" />
+            <TextField fx:id="EmployeeID" layoutX="426.0" layoutY="161.0" prefHeight="25.0" prefWidth="294.0" />
+            <TextField fx:id="Contact" layoutX="623.0" layoutY="419.0" />
+            <TextField fx:id="Salary" layoutX="623.0" layoutY="468.0" />
+            <JFXButton fx:id="insert_employee" buttonType="RAISED" layoutX="426.0" layoutY="554.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="90.0" style="-fx-border-color: #24c518; -fx-cursor: hand;" text="Confirm">
                <font>
                   <Font name="Segoe UI Semibold" size="16.0" />
                </font>
             </JFXButton>
             <JFXButton fx:id="backButton" buttonType="RAISED" layoutY="7.0" onAction="#back_Button" prefHeight="40.0" prefWidth="40.0" style="-fx-cursor: hand;" stylesheets="@sell.css" text=" " />
-            <JFXButton fx:id="search" layoutX="739.0" layoutY="161.0" prefHeight="25.0" prefWidth="25.0" style="-fx-cursor: hand;" stylesheets="@sell.css" text=" " />
+            <JFXButton fx:id="search" layoutX="733.0" layoutY="161.0" onAction="#search_emp" prefHeight="25.0" prefWidth="33.0" style="-fx-cursor: hand;" stylesheets="@sell.css" text=" " />
+            <JFXComboBox fx:id="Designation" layoutX="623.0" layoutY="268.0" prefHeight="25.0" prefWidth="149.0" />
+            <JFXComboBox fx:id="Branchname" layoutX="627.0" layoutY="321.0" prefHeight="25.0" prefWidth="149.0" />
+            <JFXDatePicker fx:id="Enrollment" layoutX="627.0" layoutY="370.0" prefHeight="28.0" prefWidth="149.0" />
          </children>
       </AnchorPane>
    </children>

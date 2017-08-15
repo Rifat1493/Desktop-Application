@@ -33,7 +33,7 @@ public class first_loginController implements Initializable {
     int check=0;
    //String  dbname=Branchname.getText();
  public static String  dbname="head_office" ;
- String name="head_office";
+ String name="Head_office";
   String temp;
     @FXML
 private void button_signin(ActionEvent event) throws Exception {

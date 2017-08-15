@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Main_first_login;
+import com.mysql.Tableemployee;
+import com.mysql.Tableproduct;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -13,7 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -27,6 +31,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /**
@@ -37,31 +42,23 @@ import javafx.stage.Stage;
 public class employeeController implements Initializable {
 
 
-
-    /*@FXML
-    private TableColumn<?, ?> EmployeeID;
+     @FXML
+    public TableView<Tableemployee> table_employee;
     @FXML
-    private TableColumn<?,? > EmployeeName;
+    private TableColumn<Tableemployee,String> col1;
     @FXML
-    private TableColumn<?, ?> Designation;
+  private TableColumn<Tableemployee,String> col2;
     @FXML
-    private TableColumn<?,?> Branchname;
+   private TableColumn<Tableemployee,String> col3;
     @FXML
-    private TableColumn<?,?> Enrollment;
+private TableColumn<Tableemployee,String> col4;
     @FXML
-    private TableColumn<?,?> Contact;
+   private TableColumn<Tableemployee,String> col5;
     @FXML
-    private TableColumn<?,?> Salary;
-*/
-    @FXML  
-    private TableView table_employee;
-     private ObservableList<ObservableList> data;
-    
-    /*DBconnection connection= (DBconnection) DBconnection.loginConnector();
-    ObservableList<employeetable>data=FXCollections.observableArrayList();
-    PreparedStatement preparedStatement=null;
-    ResultSet rs=null; */
-
+   private TableColumn<Tableemployee,String> col6;
+    @FXML
+   private TableColumn<Tableemployee, Float> col7;
+ ObservableList<Tableemployee> data;
 
     @FXML
     private void button_home(ActionEvent event) throws IOException {
@@ -95,108 +92,62 @@ public class employeeController implements Initializable {
             @FXML
     private void delete_employee(ActionEvent event) throws Exception {
 
-    int selectedIndex = table_employee.getSelectionModel().getSelectedIndex();
-                System.out.println(selectedIndex );
-
-    if (selectedIndex >= 0) {
-        table_employee.getItems().remove(selectedIndex);
+  int selectedIndex = table_employee.getSelectionModel().getSelectedIndex();
+Tableemployee  selected = table_employee.getItems().get(selectedIndex);
+ String id = selected.getEmployeeID();
+    if ( 0== 0) {
+       table_employee.getItems().remove(selectedIndex);
    
     } else {
-       
-        System.out.println("error in data deletion");
+        // Nothing selected.
+        System.out.println("error");
     }
+         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+      PreparedStatement mystat=null ;
+        mystat = myconn.prepareStatement("delete from employee where EmployeeID=?");
+       
+       mystat.setString(1,id);
+        mystat.executeUpdate();
+        
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+    
 }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-       /* EmployeeID.setCellValueFactory(new PropertyValueFactory<>("EmployeeID"));
-        EmployeeName.setCellValueFactory(new PropertyValueFactory<>("EmployeeName"));
-        Designation.setCellValueFactory(new PropertyValueFactory<>("Designation"));
-        Branchname.setCellValueFactory(new PropertyValueFactory<>("Branchname"));
-        Enrollment.setCellValueFactory(new PropertyValueFactory<>("Enrollment"));
-        Contact.setCellValueFactory(new PropertyValueFactory<>("Contact"));
-        Salary.setCellValueFactory(new PropertyValueFactory<>("Salary"));*/
-           //TABLE VIEW AND DATA
-
-
-
-         
-          data = FXCollections.observableArrayList();
-          try{
-             Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/employee","root","besimple0");
-       
-        data = FXCollections.observableArrayList();
+        try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
        Statement mystat=myconn.createStatement();
-     
-            String SQL = "SELECT * from CUSTOMer";
-            //ResultSet
-            ResultSet  rs=mystat.executeQuery("select * from employeeinfo");
-
-            /**********************************
-             * TABLE COLUMN ADDED DYNAMICALLY *
-             **********************************/
-            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
-                //We are using non property style for making dynamic table
-                final int j = i;                
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
-                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
-                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
-                    }                    
-                });
-                           table_employee.getColumns().addAll(col); 
-                System.out.println("] "+"Column ["+i);
+       ResultSet  rs=mystat.executeQuery("select * from employee");
+           data = FXCollections.observableArrayList();
+      
+       while (rs.next()) {
+                //get string from db,whichever way 
+                rs.getFloat(7);
+               
+                data.add(new Tableemployee(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), rs.getFloat(7))); 
             }
 
-            /********************************
-             * Data added to ObservableList *
-             ********************************/
-            while(rs.next()){
-                //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
-                    //Iterate Column
-                    row.add(rs.getString(i));
-                }
-                System.out.println("Row [1] added "+row );
-                data.add(row);
-
-            }
-
-            //FINALLY ADDED TO TableView
-            table_employee.setItems(data);
-          }catch(Exception e){
-              e.printStackTrace();
-              System.out.println("Error on Building Data");             
-          }
-      }
-
-    }
-
-  /*  public void loaddatabase(){ 
-
-        String query="select * from employeeinfo";
-        try {
-            preparedStatement=connection.prepareStatement(query);
-            rs=preparedStatement.executeQuery();
-            while(rs.next())
-            {
-                data.add(new employeetable(
-                rs.getString("EmployeeID"), 
-                rs.getString("EmployeeName"),
-                 rs.getString("Designation"),
-                  rs.getString("Branchname"),
-                  rs.getString("Enrollment"),
-                   rs.getString("Contact"),
-                    rs.getString("Salary")
-                ) );
-            }
-            preparedStatement.close();
-            rs.close();
-        } catch (SQLException e) {
-            System.err.println(e);
+        } catch (SQLException ex) {
+            System.err.println(ex);
         }
-}    
-    }
- */
+        
+        //Set cell value factory to tableview.
+        //NB.PropertyValue Factory must be the same with the one set in model class.
+        col1.setCellValueFactory(new PropertyValueFactory<>("EmployeeID"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("Employeename"));
+        col3.setCellValueFactory(new PropertyValueFactory<>("Designation"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("Branchname"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("Enrollment"));
+        col6.setCellValueFactory(new PropertyValueFactory<>("Contact"));
+        col7.setCellValueFactory(new PropertyValueFactory<>("Salary"));
+   
+        table_employee.setItems(null);
+        table_employee.setItems(data);
+        
 
+    }    
+    
+    }

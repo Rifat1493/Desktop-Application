@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -47,9 +50,11 @@ public class Update_productController implements Initializable {
     private TextField Company;
 
 @FXML
-    private TextField Procategory;
+  private ComboBox <String> Procategory;
 @FXML
     private TextField Productname;
+
+  ObservableList <String> list = FXCollections.observableArrayList("Clothing","Footwear","Food","Machineries"); 
    String temp;
       @FXML
     private void back_Button(ActionEvent event) throws IOException {
@@ -72,7 +77,7 @@ public class Update_productController implements Initializable {
        mystat.setString(1,ProductID.getText());
        mystat.setString(2,Productname.getText());
        mystat.setString(3,Company.getText());
-       mystat.setString(4,Procategory.getText());
+       mystat.setString(4,Procategory.getValue());
        mystat.setInt(5,Integer.parseInt(Quantity.getText()));
        mystat.setFloat(6,Float.parseFloat(Price.getText()));  
       mystat.setString(7,temp);
@@ -98,7 +103,7 @@ public class Update_productController implements Initializable {
         if(rs.next()){
          Productname.setText(rs.getString(2));
          Company.setText(rs.getString(3));
-         Procategory.setText(rs.getString(4));
+         Procategory.setValue(rs.getString(4));
          Quantity.setText(String.valueOf(rs.getInt(5)));
          Price.setText(String.valueOf(rs.getString(6)));
            }
@@ -113,6 +118,7 @@ public class Update_productController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Procategory.setItems(list);
     }    
     
 }

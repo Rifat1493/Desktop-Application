@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -36,7 +37,6 @@
             <TextField fx:id="ProductID" layoutX="426.0" layoutY="214.0" prefHeight="25.0" prefWidth="304.0" />
             <TextField fx:id="Productname" layoutX="623.0" layoutY="267.0" />
             <TextField fx:id="Company" layoutX="623.0" layoutY="321.0" />
-            <TextField fx:id="Procategory" layoutX="623.0" layoutY="372.0" />
             <TextField fx:id="Quantity" layoutX="623.0" layoutY="419.0" />
             <TextField fx:id="Price" layoutX="623.0" layoutY="468.0" />
             <JFXButton fx:id="insert_Product" buttonType="RAISED" layoutX="426.0" layoutY="550.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="90.0" style="-fx-border-color: #24c518; -fx-cursor: hand;" text="Confirm">
@@ -49,6 +49,7 @@
       
        
       <JFXButton fx:id="search" buttonType="RAISED" layoutX="747.0" layoutY="214.0" onAction="#search" prefHeight="25.0" prefWidth="25.0" style="-fx-cursor: hand;" stylesheets="@sell.css" text=" " />
+      <JFXComboBox fx:id="Procategory" layoutX="623.0" layoutY="372.0" prefHeight="25.0" prefWidth="149.0" />
 
          </children>
       </AnchorPane>

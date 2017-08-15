@@ -110,11 +110,8 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
         mystat = myconn.prepareStatement("delete from store where ProductID=?");
        
        mystat.setString(1,id);
- 
         mystat.executeUpdate();
-      
-   
-
+        
         } catch (SQLException ex) {
             System.err.println(ex);
         }
@@ -157,7 +154,6 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
         table_product.setItems(null);
         table_product.setItems(data);
         
-        System.out.println("hello12");
     }    
     
 }
