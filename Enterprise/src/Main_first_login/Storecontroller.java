@@ -157,7 +157,7 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
         table_product.setItems(null);
         table_product.setItems(data);
         
-      
+        System.out.println("hello");
     }    
     
 }
