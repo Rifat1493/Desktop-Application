@@ -1,0 +1,56 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+#home{
+    -fx-background-image:url("Image/home4.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+
+
+#search{
+     -fx-background-image:url("Image/search2.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+    
+}
+
+.button{
+      -fx-cursor: hand;
+}
+
+
+
+
+#backButton{
+    -fx-background-image:url("Image/Back-button.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+#salse_report{
+    -fx-background-image:url("Image/123.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+#salse_setting{
+    -fx-background-image:url("Image/option.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+#col1{
+    -fx-text-alignment:center;
+}

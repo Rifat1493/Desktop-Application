@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@sell.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.Storecontroller">
+   <children>
+      <TextField fx:id="search_bar" layoutX="1023.0" layoutY="83.0" prefHeight="39.0" prefWidth="178.0" promptText="Product ID/Name" style="-fx-border-color: #24c518;" />
+      <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="24.0" layoutY="21.0" onAction="#home_button1" prefHeight="40.0" prefWidth="40.0" ripplerFill="#2295f8" stylesheets="@sell.css" text=" " />
+      <TableView fx:id="table_product" layoutX="445.0" layoutY="155.0" prefHeight="459.0" prefWidth="855.0" style="-fx-border-color: #24c518;">
+         <columns>
+            <TableColumn fx:id="col1" prefWidth="172.0" text="ProductID" />
+            <TableColumn fx:id="col2" prefWidth="156.0" text="Product Name" />
+            <TableColumn fx:id="col3" minWidth="0.0" prefWidth="146.0" text="Company" />
+            <TableColumn fx:id="col4" prefWidth="106.0" text="Product Category" />
+            <TableColumn fx:id="col5" prefWidth="138.0" text="Quantity" />
+            <TableColumn fx:id="col6" prefWidth="132.0" text="Price Per Unit(Buy)" />
+         </columns>
+      </TableView>
+      <VBox alignment="TOP_CENTER" layoutX="194.0" layoutY="245.0" prefHeight="276.0" prefWidth="178.0" spacing="80.0">
+         <children>
+            <JFXButton fx:id="newproduct" onAction="#new_Product" prefHeight="29.0" prefWidth="158.0" style="-fx-border-color: #24c518; -fx-cursor: hand;" text="New Product">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="updateproduct" onAction="#store_update" prefHeight="39.0" prefWidth="165.0" style="-fx-border-color: #24c518; -fx-cursor: hand;" text="Update Product">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="updateproduct1" layoutX="17.0" layoutY="129.0" onAction="#delete_product" prefHeight="39.0" prefWidth="165.0" style="-fx-border-color: #24c518; -fx-cursor: hand;" text="Delete Product">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
+      <JFXButton fx:id="search" buttonType="RAISED" layoutX="968.0" layoutY="83.0" prefHeight="40.0" prefWidth="40.0" stylesheets="@sell.css" text=" " />
+   </children>
+</AnchorPane>

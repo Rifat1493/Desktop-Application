@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 11, 2017, 7:40:49 PM
+    Author     : Abdullah Al Munzir
+*/
+.root{
+    -fx-icon-image:url("Image/icon.png");
+}
+#Sale{
+    -fx-background-image:url("Image/Sell.1.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+#Employee{
+    -fx-background-image:url("Image/emp.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+#Store{
+    -fx-background-image:url("Image/Store.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+#Message{
+    -fx-background-image:url("Image/message.1.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+#About{
+    -fx-background-image:url("Image/about.1.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+#button_signin{
+    -fx-background-color: #07b198;
+    -fx-cursor: hand;
+}
+#signout{
+    -fx-background-image:url("Image/st2.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+#option{
+    -fx-background-image:url("Image/optn.png");
+ 
+    -fx-background-size: 100% 100%;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+

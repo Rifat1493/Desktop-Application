@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@Main_Terminal.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.Main_TerminalController">
+   <children>
+      <Label alignment="CENTER" layoutX="243.0" layoutY="342.0" prefHeight="50.0" prefWidth="100.0" text="Store" textFill="#178bae">
+         <font>
+            <Font name="Segoe UI Bold" size="15.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutY="218.0" prefHeight="141.0" prefWidth="1367.0" spacing="60.0">
+         <children>
+            <JFXButton fx:id="Store" buttonType="RAISED" onAction="#button_store" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
+            <JFXButton fx:id="Sale" buttonType="RAISED" onAction="#button_sell" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
+            <JFXButton fx:id="Employee" buttonType="RAISED" onAction="#button_employee" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
+            <JFXButton fx:id="Message" buttonType="RAISED" onAction="#message" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
+            <JFXButton fx:id="option" buttonType="RAISED" layoutX="964.0" layoutY="31.0" onAction="#manage" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
+            <JFXButton fx:id="About" buttonType="RAISED" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="568.0" prefHeight="100.0" prefWidth="1367.0">
+         <children>
+            <JFXButton id="signout" buttonType="RAISED" onAction="#log_out" prefHeight="80.0" prefWidth="80.0" stylesheets="@Main_Terminal.css" text=" " />
+         </children>
+      </HBox>
+      <HBox layoutX="394.0" layoutY="342.0" prefHeight="60.0" prefWidth="750.0" spacing="60.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Sale" textFill="#178bae">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Employee" textFill="#178bae">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Message" textFill="#178bae">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="50.0" prefWidth="100.0" text="Manage" textFill="#178bae">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="About" textFill="#178bae">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="630.0" layoutY="657.0" prefHeight="24.0" prefWidth="108.0" text="Sign Out" textFill="#178bae">
+         <font>
+            <Font name="Segoe UI Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="msglabel" layoutX="933.0" layoutY="14.0" prefHeight="50.0" prefWidth="420.0" textFill="#178bae">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

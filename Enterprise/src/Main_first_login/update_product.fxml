@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="728.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.Update_productController">
+   <children>
+            <Label layoutX="426.0" layoutY="263.0" prefHeight="34.0" prefWidth="133.0" text="Product Name">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="426.0" layoutY="316.0" prefHeight="34.0" prefWidth="133.0" text="Product Company">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="426.0" layoutY="367.0" prefHeight="34.0" prefWidth="133.0" text="Product Category">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="426.0" layoutY="415.0" prefHeight="34.0" prefWidth="133.0" text="Quantity">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="426.0" layoutY="464.0" prefHeight="34.0" prefWidth="133.0" text="Price Per Unit">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ProductID" layoutX="426.0" layoutY="214.0" prefHeight="25.0" prefWidth="304.0" />
+            <TextField fx:id="Productname" layoutX="623.0" layoutY="267.0" />
+            <TextField fx:id="Company" layoutX="623.0" layoutY="321.0" />
+            <TextField fx:id="Procategory" layoutX="623.0" layoutY="372.0" />
+            <TextField fx:id="Quantity" layoutX="623.0" layoutY="419.0" />
+            <TextField fx:id="Price" layoutX="623.0" layoutY="468.0" />
+            <JFXButton fx:id="insert_Product" buttonType="RAISED" layoutX="426.0" layoutY="550.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="90.0" style="-fx-border-color: #24c518; -fx-cursor: hand;" text="Confirm">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </JFXButton>
+
+      <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="14.0" layoutY="14.0" onAction="#back_Button" prefHeight="25.0" prefWidth="25.0" style="-fx-cursor: hand;" stylesheets="@sell.css" text=" " />
+      
+       
+      <JFXButton fx:id="search" buttonType="RAISED" layoutX="747.0" layoutY="214.0" onAction="#search" prefHeight="25.0" prefWidth="25.0" style="-fx-cursor: hand;" stylesheets="@sell.css" text=" " />
+
+         </children>
+      </AnchorPane>
