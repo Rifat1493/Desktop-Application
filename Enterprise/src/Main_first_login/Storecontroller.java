@@ -15,6 +15,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -38,7 +41,8 @@ import javafx.util.Callback;
  */
 public class Storecontroller implements Initializable {
     
-    
+     @FXML
+    private TextField search_bar;
   
      @FXML
     public TableView<Tableproduct> table_product;
@@ -125,7 +129,7 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
           
-       
+      
         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
        Statement mystat=myconn.createStatement();
        ResultSet  rs=mystat.executeQuery("select * from store");
@@ -151,8 +155,44 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
         col5.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         col6.setCellValueFactory(new PropertyValueFactory<>("Price"));
    
-        table_product.setItems(null);
-        table_product.setItems(data);
+        //table_product.setItems(null);
+       // table_product.setItems(data);
+    
+    
+    
+
+
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Tableproduct> filteredData = new FilteredList<>(data, t -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        search_bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(tableproduct -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (tableproduct.getProductID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (tableproduct.getProductname().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Tableproduct> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(table_product.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        table_product.setItems(sortedData);
         
     }    
     

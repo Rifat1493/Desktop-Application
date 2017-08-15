@@ -31,17 +31,15 @@
             </JFXButton>
          </children>
       </VBox>
-      
-      <JFXButton fx:id="search" buttonType="RAISED" layoutX="1066.0" layoutY="99.0" prefHeight="40.0" prefWidth="40.0" stylesheets="@sell.css" text=" " />
       <TableView fx:id="table_employee" layoutX="447.0" layoutY="162.0" prefHeight="459.0" prefWidth="855.0" style="-fx-border-color: #24c518;">
          <columns>
-            <TableColumn fx:id="col1" prefWidth="97.0" text="Employee ID" />
-            <TableColumn fx:id="col2" prefWidth="147.0" text="Employee Name" />
-            <TableColumn fx:id="col3" prefWidth="116.0" text="Designation" />
-            <TableColumn fx:id="col4" prefWidth="134.0" text="Branch Name" />
-            <TableColumn fx:id="col5" prefWidth="127.0" text="Enrollment" />
-            <TableColumn fx:id="col6" prefWidth="118.0" text="Contact" />
-            <TableColumn fx:id="col7" prefWidth="114.0" text="Salary(Basic)" />
+            <TableColumn fx:id="EmployeeID" prefWidth="97.0" text="Employee ID" />
+            <TableColumn fx:id="EmployeeName" prefWidth="147.0" text="Employee Name" />
+            <TableColumn fx:id="Designation" prefWidth="116.0" text="Designation" />
+            <TableColumn fx:id="Branchname" prefWidth="134.0" text="Branch Name" />
+            <TableColumn fx:id="Enrollment" prefWidth="127.0" text="Enrollment" />
+            <TableColumn fx:id="Contact" prefWidth="118.0" text="Contact" />
+            <TableColumn fx:id="Salary" prefWidth="114.0" text="Salary(Basic)" />
          </columns>
       </TableView>
    </children>

@@ -30,7 +30,7 @@ public class ClientController implements Initializable {
     public  Label username;
      ClientNickName cl;
      Thread nickName;
-    String nick ="Rifat";
+    String nick =first_loginController.dbname;
     @FXML public   TextArea inputbox; 
     @FXML public    TextArea outputbox;
     @FXML public    TextArea OnlineLable;
@@ -57,8 +57,7 @@ public class ClientController implements Initializable {
       ClientSetting.username = username;
     
        
-     String ipaddress = "182.48.76.186";
-     String nick ="harun";
+     String ipaddress = "localhost";
 
     System.err.println("ip........................"+ipaddress+"\n"+"****"+nick);
     cl  = new ClientNickName(ipaddress,nick); 

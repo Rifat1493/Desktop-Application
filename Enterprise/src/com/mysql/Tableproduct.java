@@ -38,7 +38,7 @@ public class Tableproduct {
     }
 
     //Getters
-    public String getProductID() {
+    public  String getProductID() {
         return ProductID.get();
     }
 

@@ -22,6 +22,8 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +33,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -40,7 +43,9 @@ import javafx.stage.Stage;
  * @author shifat
  */
 public class employeeController implements Initializable {
-
+@FXML
+    private TextField search_bar;
+  
 
      @FXML
     public TableView<Tableemployee> table_employee;
@@ -144,10 +149,40 @@ Tableemployee  selected = table_employee.getItems().get(selectedIndex);
         col6.setCellValueFactory(new PropertyValueFactory<>("Contact"));
         col7.setCellValueFactory(new PropertyValueFactory<>("Salary"));
    
-        table_employee.setItems(null);
-        table_employee.setItems(data);
-        
-        System.out.println("hit");
+     //   table_employee.setItems(null);
+    //    table_employee.setItems(data);
+    
+        FilteredList<Tableemployee> filteredData = new FilteredList<>(data, t -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        search_bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(tableproduct -> { //tableproduct line can be used by other name
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (tableproduct.getEmployeeID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (tableproduct.getEmployeename().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Tableemployee> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(table_employee.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        table_employee.setItems(sortedData);
+      
     }    
     
     }

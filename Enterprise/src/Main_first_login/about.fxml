@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: ;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.aboutcontroller">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: ;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.aboutcontroller">
    <children>
       <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="35.0" layoutY="30.0" onAction="#back_button" prefHeight="40.0" prefWidth="40.0" ripplerFill="#2295f8" stylesheets="@sell.css" text=" " />
       <VBox layoutX="376.0" layoutY="14.0" prefHeight="218.0" prefWidth="178.0">
@@ -47,7 +47,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="563.0" layoutY="103.0" prefHeight="58.0" prefWidth="222.0" text="Email ID: rifat 1493@yahoo.com">
+      <Label layoutX="563.0" layoutY="103.0" prefHeight="58.0" prefWidth="232.0" text="Email ID: rifat15-5611@diu.edu.bd">
          <font>
             <Font size="15.0" />
          </font>
