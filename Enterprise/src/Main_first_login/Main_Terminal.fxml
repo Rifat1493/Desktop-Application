@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@Main_Terminal.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.Main_TerminalController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@Main_Terminal.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.Main_TerminalController">
    <children>
       <Label alignment="CENTER" layoutX="243.0" layoutY="342.0" prefHeight="50.0" prefWidth="100.0" text="Store" textFill="#178bae">
          <font>
             <Font name="Segoe UI Bold" size="15.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutY="218.0" prefHeight="141.0" prefWidth="1367.0" spacing="60.0">
+      <HBox alignment="CENTER" layoutY="218.0" prefHeight="141.0" prefWidth="1373.0" spacing="60.0">
          <children>
             <JFXButton fx:id="Store" buttonType="RAISED" onAction="#button_store" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
             <JFXButton fx:id="Sale" buttonType="RAISED" onAction="#button_sell" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
             <JFXButton fx:id="Employee" buttonType="RAISED" onAction="#button_employee" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
             <JFXButton fx:id="Message" buttonType="RAISED" onAction="#message" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
             <JFXButton fx:id="option" buttonType="RAISED" layoutX="964.0" layoutY="31.0" onAction="#manage" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
-            <JFXButton fx:id="About" buttonType="RAISED" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
+            <JFXButton fx:id="About" buttonType="RAISED" onAction="#button_about" prefHeight="100.0" prefWidth="100.0" stylesheets="@Main_Terminal.css" text=" " />
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutY="568.0" prefHeight="100.0" prefWidth="1367.0">

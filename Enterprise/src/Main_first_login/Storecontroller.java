@@ -150,7 +150,7 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
         col1.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
         col2.setCellValueFactory(new PropertyValueFactory<>("Productname"));
         col3.setCellValueFactory(new PropertyValueFactory<>("Company"));
-          col4.setCellValueFactory(new PropertyValueFactory<>("Procategory"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("Procategory"));
         col5.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         col6.setCellValueFactory(new PropertyValueFactory<>("Price"));
    

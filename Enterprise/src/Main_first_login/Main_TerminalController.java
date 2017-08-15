@@ -92,6 +92,15 @@ public class Main_TerminalController implements Initializable {
         main_stage.show();
          
     }
+   @FXML
+    private void button_about(ActionEvent event) throws IOException {
+        Parent main_parent = FXMLLoader.load(getClass().getResource("about.fxml"));
+        Scene main_scene = new Scene(main_parent);
+        Stage main_stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
+        main_stage.setScene(main_scene);
+        main_stage.show();
+         
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
