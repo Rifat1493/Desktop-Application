@@ -147,7 +147,7 @@ Tableemployee  selected = table_employee.getItems().get(selectedIndex);
         table_employee.setItems(null);
         table_employee.setItems(data);
         
-
+        System.out.println("hit");
     }    
     
     }
