@@ -100,13 +100,7 @@ private TableColumn<Tableemployee,String> col4;
   int selectedIndex = table_employee.getSelectionModel().getSelectedIndex();
 Tableemployee  selected = table_employee.getItems().get(selectedIndex);
  String id = selected.getEmployeeID();
-    if ( 0== 0) {
-       table_employee.getItems().remove(selectedIndex);
-   
-    } else {
-        // Nothing selected.
-        System.out.println("error");
-    }
+
          try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
       PreparedStatement mystat=null ;
         mystat = myconn.prepareStatement("delete from employee where EmployeeID=?");
@@ -117,13 +111,76 @@ Tableemployee  selected = table_employee.getItems().get(selectedIndex);
         } catch (SQLException ex) {
             System.err.println(ex);
         }
-        
-    
+         refresh();
 }
+    @FXML
+    public void refresh(){
+         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+       Statement mystat=myconn.createStatement();
+       ResultSet  rs=mystat.executeQuery("select * from employee");
+           data = FXCollections.observableArrayList();
+      
+       while (rs.next()) {
+                //get string from db,whichever way 
+                rs.getFloat(7);
+               
+                data.add(new Tableemployee(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), rs.getFloat(7))); 
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+        //Set cell value factory to tableview.
+        //NB.PropertyValue Factory must be the same with the one set in model class.
+        col1.setCellValueFactory(new PropertyValueFactory<>("EmployeeID"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("Employeename"));
+        col3.setCellValueFactory(new PropertyValueFactory<>("Designation"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("Branchname"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("Enrollment"));
+        col6.setCellValueFactory(new PropertyValueFactory<>("Contact"));
+        col7.setCellValueFactory(new PropertyValueFactory<>("Salary"));
+   
+     //   table_employee.setItems(null);
+    //    table_employee.setItems(data);
+    
+        FilteredList<Tableemployee> filteredData = new FilteredList<>(data, t -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        search_bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(tableproduct -> { //tableproduct line can be used by other name
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (tableproduct.getEmployeeID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (tableproduct.getEmployeename().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Tableemployee> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(table_employee.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        table_employee.setItems(sortedData);
+      
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+      try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
        Statement mystat=myconn.createStatement();
        ResultSet  rs=mystat.executeQuery("select * from employee");
            data = FXCollections.observableArrayList();

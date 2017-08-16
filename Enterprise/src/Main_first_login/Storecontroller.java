@@ -99,16 +99,9 @@ public class Storecontroller implements Initializable {
             @FXML
     private void delete_product(ActionEvent event) throws Exception {
 
-  int selectedIndex = table_product.getSelectionModel().getSelectedIndex();
+     int selectedIndex = table_product.getSelectionModel().getSelectedIndex();
 Tableproduct  selected = table_product.getItems().get(selectedIndex);
  String id = selected.getProductID();
-    if ( 0== 0) {
-       table_product.getItems().remove(selectedIndex);
-   
-    } else {
-        // Nothing selected.
-        System.out.println("error");
-    }
          try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
       PreparedStatement mystat=null ;
         mystat = myconn.prepareStatement("delete from store where ProductID=?");
@@ -119,18 +112,13 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
         } catch (SQLException ex) {
             System.err.println(ex);
         }
-        
-    
+      show();
+   
 }
-        
-        
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-          
-      
-        try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+    @FXML
+public   void show(){
+       
+   try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
        Statement mystat=myconn.createStatement();
        ResultSet  rs=mystat.executeQuery("select * from store");
            data = FXCollections.observableArrayList();
@@ -155,8 +143,8 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
         col5.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         col6.setCellValueFactory(new PropertyValueFactory<>("Price"));
    
-        //table_product.setItems(null);
-       // table_product.setItems(data);
+       // table_product.setItems(null);
+        //table_product.setItems(data);
     
     
     
@@ -192,8 +180,83 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
         sortedData.comparatorProperty().bind(table_product.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
+        table_product.setItems(null);
         table_product.setItems(sortedData);
+}    
         
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+  
+         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+       Statement mystat=myconn.createStatement();
+       ResultSet  rs=mystat.executeQuery("select * from store");
+           data = FXCollections.observableArrayList();
+      
+       while (rs.next()) {
+                //get string from db,whichever way 
+                rs.getFloat(6);
+               
+                data.add(new Tableproduct(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getFloat(6))); 
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        
+        //Set cell value factory to tableview.
+        //NB.PropertyValue Factory must be the same with the one set in model class.
+        col1.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("Productname"));
+        col3.setCellValueFactory(new PropertyValueFactory<>("Company"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("Procategory"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+        col6.setCellValueFactory(new PropertyValueFactory<>("Price"));
+   
+       // table_product.setItems(null);
+        //table_product.setItems(data);
+    
+    
+    
+
+
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Tableproduct> filteredData = new FilteredList<>(data, t -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        search_bar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(tableproduct -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (tableproduct.getProductID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (tableproduct.getProductname().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Tableproduct> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(table_product.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        table_product.setItems(null);
+        table_product.setItems(sortedData);
+      
+       
+
     }    
+    
     
 }

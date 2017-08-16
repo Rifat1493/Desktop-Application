@@ -20,7 +20,7 @@ public class Enterprise extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("employee.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Main_Terminal.fxml"));
         
         Scene scene = new Scene(root);
         
