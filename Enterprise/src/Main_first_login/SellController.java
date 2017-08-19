@@ -108,6 +108,19 @@ public class SellController implements Initializable {
         main_stage.show();
     }
     
+    @FXML
+    private void slaesReports_button(ActionEvent event) throws IOException {
+       
+            
+        Parent main_parent = FXMLLoader.load(getClass().getResource("Sales_reports.fxml"));
+        Scene main_scene = new Scene(main_parent);
+        Stage main_stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
+        main_stage.setScene(main_scene);
+        main_stage.show();
+    }
+    
+    
+    
     
     @FXML
     void AddButtonAction(ActionEvent event) {

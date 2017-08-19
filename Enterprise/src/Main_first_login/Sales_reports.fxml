@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="Main_first_login.Sales_reportsController">
+   <children>
+      <TableView fx:id="sales_reports_table" layoutX="103.0" layoutY="169.0" prefHeight="430.0" prefWidth="1160.0" style="-fx-border-color: #24c518;" stylesheets="@sell.css">
+         <columns>
+            <TableColumn fx:id="col1" prefWidth="107.99996948242188" text="Date" />
+            <TableColumn fx:id="col2" minWidth="6.0" prefWidth="127.0" text="Product ID" />
+            <TableColumn fx:id="col3" prefWidth="197.0" text="Product Name" />
+            <TableColumn fx:id="col4" prefWidth="85.0" text="Unit Price" />
+            <TableColumn fx:id="col5" prefWidth="61.0" text="Qty" />
+            <TableColumn fx:id="col6" prefWidth="86.0" text="Amount" />
+            <TableColumn fx:id="col7" prefWidth="71.0" text="VAT" />
+            <TableColumn fx:id="col8" prefWidth="90.0" text="Discount" />
+            <TableColumn fx:id="col9" prefWidth="92.0" text="Net Amount" />
+            <TableColumn fx:id="col10" prefWidth="132.0" text="Cust. Name" />
+            <TableColumn fx:id="col11" prefWidth="107.0" text="Cust. Phone" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="24.0" layoutY="32.0" onAction="#back_button" prefHeight="40.0" prefWidth="40.0" ripplerFill="#2295f8" stylesheets="@sell.css" text=" " />
+   </children>
+</AnchorPane>
