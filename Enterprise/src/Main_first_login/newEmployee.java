@@ -61,7 +61,7 @@ public class newEmployee implements Initializable{
     void handleButtonAction(ActionEvent event) {
       try{
  
-            Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+            Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
          PreparedStatement mystat=null ;
          String datevalue=Date.valueOf(Enrollment.getValue()).toString();
          mystat = myconn.prepareStatement("insert into employee(EmployeeID,Employeename,Designation,Branchname,Enrollment,Contact,Salary) values(?,?,?,?,?,?,?)");
@@ -95,7 +95,7 @@ public class newEmployee implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
        Designation.setItems(listdesig);
        
-         try{  Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+         try{  Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
           Statement mystat=myconn.createStatement();
           ResultSet  rs=mystat.executeQuery("select Branchname from login");
       List<String> list=new ArrayList<String>();

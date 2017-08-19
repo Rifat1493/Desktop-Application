@@ -70,7 +70,7 @@ public class Update_productController implements Initializable {
  @FXML
     void handleButtonAction(ActionEvent event) {
        
-    try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+    try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
          PreparedStatement mystat=null ;
         mystat = myconn.prepareStatement("update store set ProductID=?,Productname=?,Company=?,Procategory=?,Quantity=?,Price=? where ProductID=?");
        
@@ -93,7 +93,7 @@ public class Update_productController implements Initializable {
     }
      @FXML
     void search(ActionEvent event) {
-          try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+          try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
          PreparedStatement mystat=null ;
         mystat = myconn.prepareStatement("select * from store where ProductID=?");
         temp= ProductID.getText();

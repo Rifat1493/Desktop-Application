@@ -1,6 +1,4 @@
 package Main_first_login;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import com.mysql.Tableproduct;
 import java.io.IOException;
 import java.net.URL;
@@ -11,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -21,19 +17,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 /**
  *
@@ -102,7 +93,7 @@ public class Storecontroller implements Initializable {
      int selectedIndex = table_product.getSelectionModel().getSelectedIndex();
 Tableproduct  selected = table_product.getItems().get(selectedIndex);
  String id = selected.getProductID();
-         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
       PreparedStatement mystat=null ;
         mystat = myconn.prepareStatement("delete from store where ProductID=?");
        
@@ -118,7 +109,7 @@ Tableproduct  selected = table_product.getItems().get(selectedIndex);
     @FXML
 public   void show(){
        
-   try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+   try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
        Statement mystat=myconn.createStatement();
        ResultSet  rs=mystat.executeQuery("select * from store");
            data = FXCollections.observableArrayList();
@@ -189,7 +180,7 @@ public   void show(){
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
   
-         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
        Statement mystat=myconn.createStatement();
        ResultSet  rs=mystat.executeQuery("select * from store");
            data = FXCollections.observableArrayList();

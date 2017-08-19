@@ -37,7 +37,7 @@ public class first_loginController implements Initializable {
   String temp;
     @FXML
 private void button_signin(ActionEvent event) throws Exception {
-try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/"+name,"root","p123456");
+try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/"+name,"root","besimple0");
          PreparedStatement mystat=null ;
         mystat = myconn.prepareStatement("select*from login where Username=? and Password=? and  Branchname=?");
        

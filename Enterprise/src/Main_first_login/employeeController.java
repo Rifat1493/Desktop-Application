@@ -101,7 +101,7 @@ private TableColumn<Tableemployee,String> col4;
 Tableemployee  selected = table_employee.getItems().get(selectedIndex);
  String id = selected.getEmployeeID();
 
-         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
       PreparedStatement mystat=null ;
         mystat = myconn.prepareStatement("delete from employee where EmployeeID=?");
        
@@ -115,7 +115,7 @@ Tableemployee  selected = table_employee.getItems().get(selectedIndex);
 }
     @FXML
     public void refresh(){
-         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
        Statement mystat=myconn.createStatement();
        ResultSet  rs=mystat.executeQuery("select * from employee");
            data = FXCollections.observableArrayList();
@@ -180,7 +180,7 @@ Tableemployee  selected = table_employee.getItems().get(selectedIndex);
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-      try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+      try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","besimple0");
        Statement mystat=myconn.createStatement();
        ResultSet  rs=mystat.executeQuery("select * from employee");
            data = FXCollections.observableArrayList();
