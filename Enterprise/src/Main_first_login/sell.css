@@ -54,3 +54,12 @@
 #col1{
     -fx-text-alignment:center;
 }
+
+
+/*#col1{
+    -fx-alignment: BASELINE_CENTER;
+}*/
+
+.table-cell {
+    -fx-alignment: BASELINE_CENTER;
+ }
