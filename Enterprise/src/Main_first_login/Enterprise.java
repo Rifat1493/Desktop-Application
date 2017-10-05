@@ -18,6 +18,8 @@ import javafx.stage.Stage;
  */
 public class Enterprise extends Application {
     
+    
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Main_Terminal.fxml"));
@@ -30,6 +32,8 @@ public class Enterprise extends Application {
         stage.getIcons().add(micon);
         
         stage.setScene(scene);
+        
+        //stage.setResizable(false);
         stage.show();
     }
 

@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" stylesheets="@sell.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.SellController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" stylesheets="@sell.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.SellController">
    <children>
-       <VBox fillWidth="false" layoutX="363.0" layoutY="497.0" prefHeight="145.0" prefWidth="225.0" spacing="5.0">
+       <VBox fillWidth="false" layoutX="363.0" layoutY="182.0" prefHeight="145.0" prefWidth="225.0" spacing="5.0">
          <children>
             <TextField fx:id="cust_name" prefHeight="35.0" prefWidth="242.0" promptText="Mr. Customer" style="-fx-border-color: #24c518;" />
             <TextField fx:id="cust_contact" prefHeight="35.0" prefWidth="242.0" promptText="Contacts" style="-fx-border-color: #24c518;" />
@@ -32,13 +32,13 @@
             <TableColumn fx:id="col7" prefWidth="81.0" text="Discount" />
         </columns>
       </TableView>
-      <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="481.0" layoutY="342.0" onAction="#AddButtonAction" prefHeight="35.0" prefWidth="107.0" style="-fx-border-color: #24c518;" text="Add">
+      <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="481.0" layoutY="577.0" onAction="#AddButtonAction" prefHeight="35.0" prefWidth="107.0" style="-fx-border-color: #24c518;" text="Add">
          <font>
             <Font name="Segoe UI Semibold" size="14.0" />
          </font>
          
                         </JFXButton>
-      <VBox fillWidth="false" layoutX="363.0" layoutY="182.0" prefHeight="163.0" prefWidth="225.0" spacing="5.0">
+      <VBox fillWidth="false" layoutX="363.0" layoutY="417.0" prefHeight="163.0" prefWidth="225.0" spacing="5.0">
          <children>
             <TextField fx:id="pro_text" prefHeight="35.0" prefWidth="236.0" promptText="Product" style="-fx-border-color: #24c518;" />
             <TextField fx:id="pro_qty" prefHeight="35.0" prefWidth="107.0" promptText="Quantity" style="-fx-border-color: #24c518;" text="1" />
@@ -47,7 +47,7 @@
          </children>
       </VBox>
       
-      <VBox layoutX="295.0" layoutY="497.0" prefHeight="174.0" prefWidth="68.0" spacing="5.0">
+      <VBox layoutX="295.0" layoutY="182.0" prefHeight="174.0" prefWidth="68.0" spacing="5.0">
          <children>
             <Label prefHeight="35.0" prefWidth="47.0" text="Name">
                <font>
@@ -66,7 +66,7 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="295.0" layoutY="182.0" prefHeight="206.0" prefWidth="68.0" spacing="5.0">
+      <VBox layoutX="295.0" layoutY="417.0" prefHeight="206.0" prefWidth="68.0" spacing="5.0">
          <children>
             <Label prefHeight="35.0" prefWidth="60.0" text="Product">
                <font>
@@ -88,28 +88,37 @@
                   <Font name="Segoe UI Semibold" size="14.0" />
                </font>
             </Label>
+            <Label prefHeight="35.0" prefWidth="68.0" text="VAT">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
-      <Pane layoutX="1175.0" layoutY="54.0" prefHeight="111.0" prefWidth="152.0" style="-fx-border-color: #24c518;">
+      <Pane fx:id="CalPane" layoutX="1175.0" layoutY="54.0" prefHeight="111.0" prefWidth="152.0" style="-fx-border-color: #24c518;">
          <children>
             <VBox alignment="CENTER_RIGHT" layoutX="8.0" prefHeight="111.0" prefWidth="68.0">
                <children>
                   <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="90.0" text="Sub Total:">
                      <font>
                         <Font name="Segoe UI Semibold" size="13.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                   <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="47.0" text="VAT:">
                      <font>
                         <Font name="Segoe UI Semibold" size="13.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                   <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="68.0" text="Discount:">
                      <font>
                         <Font name="Segoe UI Semibold" size="13.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                   <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="74.0" text="Net Bill:">
                      <font>
                         <Font name="Segoe UI Semibold" size="13.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                </children>
             </VBox>
             <VBox alignment="CENTER_RIGHT" layoutX="87.0" layoutY="3.0" prefHeight="105.0" prefWidth="63.0">
@@ -117,36 +126,40 @@
                   <Label fx:id="label_subtotal" prefHeight="25.0" prefWidth="63.0" text="0.0" textFill="#08bcd0">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                   <Label fx:id="label_vat" prefHeight="25.0" prefWidth="63.0" text="0.0" textFill="#f2d21e">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                   <Label fx:id="label_discount" prefHeight="25.0" prefWidth="63.0" text="0.0" textFill="#42e10e">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                   <Label fx:id="label_netbill" prefHeight="25.0" prefWidth="63.0" text="0.0" textFill="#2b6cdd">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                </children>
             </VBox>
          </children>
       </Pane>
-      <Label layoutX="453.0" layoutY="302.0" prefHeight="35.0" prefWidth="16.0" text="\%">
+      <Label layoutX="453.0" layoutY="537.0" prefHeight="35.0" prefWidth="16.0" text="\%">
          <font>
             <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Label>
-      <CheckBox fx:id="vat_check" layoutX="363.0" layoutY="342.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="107.0" style="-fx-border-color: #24c518;" text="Inc VAT">
+      <CheckBox fx:id="vat_ck" layoutX="363.0" layoutY="577.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="107.0" style="-fx-border-color: #24c518;" text="Inc. VAT">
          <font>
             <Font name="Segoe UI Semibold" size="12.0" />
          </font>
       </CheckBox>
       <HBox alignment="TOP_CENTER" layoutX="635.0" layoutY="640.0" prefHeight="60.0" prefWidth="692.0" spacing="20.0">
          <children>
-            <JFXButton fx:id="reset" buttonType="RAISED" onAction="#reset" prefHeight="35.0" prefWidth="75.0" ripplerFill="#23dd02" style="-fx-border-color: #1bc500;" text="Reset">
+            <JFXButton fx:id="reset" buttonType="RAISED" onAction="#reset" prefHeight="35.0" prefWidth="75.0" style="-fx-border-color: #005de0;" text="Reset" textFill="#005de0">
                <font>
                   <Font name="Segoe UI Semibold" size="14.0" />
                </font>
@@ -156,27 +169,17 @@
                   <Font name="Segoe UI Semibold" size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#total" prefHeight="35.0" prefWidth="75.0" style="-fx-border-color: #00d6d6;" text="Total" textFill="#00d6d6">
+            <JFXButton buttonType="RAISED" onAction="#Confirm" prefHeight="35.0" prefWidth="75.0" style="-fx-border-color: #1bc500;" text="Confirm" textFill="#1bc500">
                <font>
                   <Font name="Segoe UI Semibold" size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" prefHeight="35.0" prefWidth="75.0" style="-fx-border-color: #1bc500;" text="Confirm" textFill="#1bc500">
-               <font>
-                  <Font name="Segoe UI Semibold" size="14.0" />
-               </font>
-            </JFXButton>
-            <JFXButton prefHeight="35.0" prefWidth="75.0" style="-fx-border-color: #00d6d6;" text="Print" textFill="#00d6d6">
+            <JFXButton buttonType="RAISED" onAction="#receipt" prefHeight="35.0" prefWidth="75.0" style="-fx-border-color: #00d6d6;" text="Receipt" textFill="#00d6d6">
                <font>
                   <Font name="Segoe UI Semibold" size="14.0" />
                </font>
             </JFXButton>
          </children></HBox>
-      <Label fx:id="qty_label" layoutX="480.0" layoutY="222.0" prefHeight="35.0" prefWidth="107.0" textFill="RED">
-         <font>
-            <Font name="Segoe UI Semibold" size="13.0" />
-         </font>
-      </Label>
       <HBox alignment="CENTER" layoutX="22.0" layoutY="33.0" prefHeight="77.0" prefWidth="252.0" spacing="35.0">
          <children>
             <JFXButton fx:id="backButton" buttonType="RAISED" onAction="#home_button" prefHeight="45.0" prefWidth="45.0" ripplerFill="#2295f8" stylesheets="@sell.css" text=" " />

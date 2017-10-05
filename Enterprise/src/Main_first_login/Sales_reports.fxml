@@ -10,23 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main_first_login.Sales_reportsController">
    <children>
-      <TableView fx:id="sales_reports_table" layoutX="103.0" layoutY="118.0" prefHeight="513.0" prefWidth="1160.0" style="-fx-border-color: #24c518;" stylesheets="@sell.css">
-         <columns>
-            <TableColumn fx:id="col1" prefWidth="107.99996948242188" text="Date" />
-            <TableColumn fx:id="col2" minWidth="6.0" prefWidth="127.0" text="Product ID" />
-            <TableColumn fx:id="col3" prefWidth="197.0" text="Product Name" />
-            <TableColumn fx:id="col4" prefWidth="85.0" text="Unit Price" />
-            <TableColumn fx:id="col5" prefWidth="61.0" text="Qty" />
-            <TableColumn fx:id="col6" prefWidth="86.0" text="Amount" />
-            <TableColumn fx:id="col7" prefWidth="71.0" text="VAT" />
-            <TableColumn fx:id="col8" prefWidth="90.0" text="Discount" />
-            <TableColumn fx:id="col9" prefWidth="92.0" text="Net Amount" />
-            <TableColumn fx:id="col10" prefWidth="132.0" text="Cust. Name" />
-            <TableColumn fx:id="col11" prefWidth="107.0" text="Cust. Phone" />
-         </columns>
-      </TableView>
-      <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="24.0" layoutY="32.0" onAction="#back_button" prefHeight="40.0" prefWidth="40.0" ripplerFill="#2295f8" stylesheets="@sell.css" text=" " />
-      <HBox alignment="CENTER_LEFT" layoutX="103.0" layoutY="56.0" prefHeight="50.0" prefWidth="604.0" spacing="20.0">
+       <HBox alignment="CENTER_LEFT" layoutX="103.0" layoutY="56.0" prefHeight="50.0" prefWidth="604.0" spacing="20.0">
          <children>
             <TextField fx:id="date_text" prefHeight="36.0" prefWidth="128.0" promptText="Search by date" style="-fx-border-color: #24c518; -fx-border-width: 2;" />
             <TextField fx:id="product_text" prefHeight="36.0" prefWidth="153.0" promptText="Search by Product name" style="-fx-border-color: #24c518; -fx-border-width: 2;" />
@@ -34,6 +18,23 @@
             <TextField fx:id="custphone_text" prefHeight="36.0" prefWidth="135.0" promptText="Search by Cust phone" style="-fx-border-color: #24c518; -fx-border-width: 2;" />
          </children>
       </HBox>
+      <TableView fx:id="sr_table" layoutX="103.0" layoutY="118.0" prefHeight="513.0" prefWidth="1160.0" style="-fx-border-color: #24c518;" stylesheets="@sell.css">
+         <columns>
+            <TableColumn fx:id="col1" prefWidth="140.99996948242188" text="Cust. Name" />
+            <TableColumn fx:id="col2" prefWidth="120.0" text="Cust. Phone" />
+            <TableColumn fx:id="col3" prefWidth="133.0" text="Date &amp; Time" />
+            <TableColumn fx:id="col4" minWidth="6.0" prefWidth="160.0" text="Product ID" />
+            <TableColumn fx:id="col5" prefWidth="204.0" text="Product Name" />
+            <TableColumn fx:id="col6" prefWidth="79.0" text="U. Price" />
+            <TableColumn fx:id="col7" prefWidth="52.0" text="Qty" />
+            <TableColumn fx:id="col8" prefWidth="71.0" text="Amount" />
+            <TableColumn fx:id="col9" prefWidth="46.0" text="VAT" />
+            <TableColumn fx:id="col10" minWidth="0.0" prefWidth="59.0" text="Discount" />
+            <TableColumn fx:id="col11" prefWidth="92.0" text="Net Amount" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="24.0" layoutY="32.0" onAction="#back_button" prefHeight="40.0" prefWidth="40.0" ripplerFill="#2295f8" stylesheets="@sell.css" text=" " />
+      
       <JFXComboBox fx:id="Total_sell_by" layoutX="1091.0" layoutY="64.0" prefHeight="35.0" prefWidth="122.0" promptText="Total sell by" style="-fx-background-color: #fff76b; -fx-border-color: #00eaff; -fx-border-width: 2;" unFocusColor="#00eaff" />
       <JFXButton fx:id="search" buttonType="RAISED" layoutX="1228.0" layoutY="64.0" prefHeight="35.0" prefWidth="35.0" style="-fx-cursor: hand;" stylesheets="@sell.css" text=" " />
    </children>

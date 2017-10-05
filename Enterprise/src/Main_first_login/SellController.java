@@ -6,6 +6,8 @@
 package Main_first_login;
 
 import com.mysql.temptable;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -25,13 +27,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
+
 
 /**
  * FXML Controller class
@@ -43,40 +50,40 @@ public class SellController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+   
+ 
+    
     ArrayList proName = new ArrayList();
     
     @FXML private Label label_subtotal;
     @FXML private Label label_discount;
     @FXML private Label label_vat;
     @FXML private Label label_netbill;
+    @FXML private AnchorPane NewAP;
+    @FXML private AnchorPane root;
     
-    @FXML private Label qty_label;
-    
+    @FXML
+    private CheckBox vat_ck;
     @FXML
     private TextField pro_text;
-    
     @FXML
     private TextField pro_qty;
-    
     @FXML
     private TextField pro_price;
-    
     @FXML
     private TextField pro_discount;
-    
     @FXML
-    private TextField cust_name;
-    
+    public TextField cust_name;
     @FXML
     private TextField cust_contact;
-    
     @FXML
     private TextField cust_address;
-    
     String temp;
-    public float subtotal, totalp, discount, total_discount,D, net_bill;
-    //public int D;
-    public String id;
+    
+    public float subtotal, totalp, discount,totalVAT, VAT, total_discount,D,V, net_bill;
+    
+    public String id, C_name_receipt;
     
     @FXML
     public TableView<temptable> temp_table;
@@ -97,6 +104,8 @@ public class SellController implements Initializable {
 
     ObservableList<temptable> data;
     
+   
+    
     @FXML
     private void home_button(ActionEvent event) throws IOException {
        
@@ -107,6 +116,7 @@ public class SellController implements Initializable {
         main_stage.setScene(main_scene);
         main_stage.show();
     }
+    
     
     @FXML
     private void slaesReports_button(ActionEvent event) throws IOException {
@@ -125,12 +135,37 @@ public class SellController implements Initializable {
     @FXML
     void AddButtonAction(ActionEvent event) {
         
-        if("0".equals(pro_qty.getText())){
-            qty_label.setText("Must be at least 1");
+        
+        
+        if("".equals(cust_contact.getText()) || "".equals(pro_qty.getText()) || "0".equals(pro_qty.getText())){
+            
+            //***Dialog box***//
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            
+            //***Setting icon of alert box***//
+            Stage stage =(Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(this.getClass().getResource("/bag4.png").toString()));
+            
+            
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Ooopss, there was an error!");
+
+            if("".equals(cust_contact.getText())){
+                alert.setContentText("Contact Number is required.\n");
+            }
+            else{
+                alert.setContentText("Quantity must be at least One.");
+            }
+            alert.showAndWait();
         }
-        else{
+        else{      
+            
+            if(vat_ck.isSelected()){
+                V=4;}
+            else{
+                V=0;}
       
-      try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","12345");
+      try{Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","12345");
       
         PreparedStatement mystatement=null ;
         mystatement = myconn.prepareStatement("select ProductID, Price from store where Productname=?");
@@ -146,19 +181,25 @@ public class SellController implements Initializable {
             totalp=Float.parseFloat(rs.getString("Price"))*Float.parseFloat(pro_qty.getText());
             D = Float.parseFloat(pro_discount.getText());
             discount=(totalp*D)/100;
+            VAT=(totalp*V)/100;
+            
+           
         
        PreparedStatement mystat=null ;
         
         
-       mystat = myconn.prepareStatement("insert into sell_temp (ProductID,Productname,Unit_Price ,Quantity, Amount, VAT, Discount) values(?,?,?,?,?,?,?)");
+       mystat = myconn.prepareStatement("insert into sell_temp (Cust_Name, Cust_Phone, Product_Id,Product_Name,Unit_Price ,Qty, Amount, VAT, Discount, Net_Amount) values(?,?,?,?,?,?,?,?,?,?)");
        
-       mystat.setString(1, rs.getString("ProductID"));
-       mystat.setString(2,pro_text.getText());
-       mystat.setFloat(3,Float.parseFloat(rs.getString("Price")));
-       mystat.setInt(4,Integer.parseInt(pro_qty.getText()));
-       mystat.setFloat(5, Float.parseFloat(rs.getString("Price"))*Float.parseFloat(pro_qty.getText())); 
-       mystat.setFloat(6, 4);
-       mystat.setFloat(7,discount);
+       mystat.setString(1,cust_name.getText());
+       mystat.setString(2,cust_contact.getText());
+       mystat.setString(3, rs.getString("ProductID"));
+       mystat.setString(4,pro_text.getText());
+       mystat.setFloat(5,Float.parseFloat(rs.getString("Price")));
+       mystat.setInt(6,Integer.parseInt(pro_qty.getText()));
+       mystat.setFloat(7, Float.parseFloat(rs.getString("Price"))*Float.parseFloat(pro_qty.getText())); 
+       mystat.setFloat(8, VAT);
+       mystat.setFloat(9,discount);
+       mystat.setFloat(10,totalp-discount);
        mystat.executeUpdate();
        
        
@@ -167,7 +208,9 @@ public class SellController implements Initializable {
        
        total_discount=total_discount+discount;
        
-       net_bill=subtotal-total_discount;
+       totalVAT=totalVAT+VAT;
+       
+       net_bill=subtotal-total_discount+totalVAT;
         
        }
       
@@ -180,8 +223,12 @@ public class SellController implements Initializable {
       pro_text.setText("");// clearing the product text field
       pro_qty.setText("1");
       pro_discount.setText("0");
-      qty_label.setText("");
-        }
+      
+            }
+       
+        total();
+       
+        
       
     }    
     
@@ -189,28 +236,24 @@ public class SellController implements Initializable {
     private void reset(ActionEvent event) throws Exception {
 
     
-        try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","12345");
-        //Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
-        
-         
-        PreparedStatement mystat=null ;
-
-        mystat = myconn.prepareStatement("delete from sell_temp");
-        mystat.executeUpdate();
-
-         } catch (SQLException ex) {
-             System.err.println(ex);
-         }
+        delete_tempTable();
         
         showtemptable();
+        cust_name.setText("");
+        cust_contact.setText("");
+        cust_address.setText("");
         pro_text.setText("");// clearing the product text field
         pro_qty.setText("1");
         pro_discount.setText("0");
-        qty_label.setText("");
         label_subtotal.setText("0.0");
         label_discount.setText("0.0");
         label_vat.setText("0.0");
         label_netbill.setText("0.0");
+        subtotal=0;
+        total_discount=0;
+        totalVAT=0;
+        net_bill=0;
+
         
         
 }
@@ -221,7 +264,7 @@ public class SellController implements Initializable {
 
     int selectedIndex = temp_table.getSelectionModel().getSelectedIndex();
     temptable  selected = temp_table.getItems().get(selectedIndex);
-    id = selected.getProductID();
+    id = selected.getProduct_Id();
     if ( 0== 0) {
        temp_table.getItems().remove(selectedIndex);
    
@@ -238,7 +281,7 @@ public class SellController implements Initializable {
          
         PreparedStatement mystat=null ;
 
-        mystat = myconn.prepareStatement("delete from sell_temp where ProductID=?");
+        mystat = myconn.prepareStatement("delete from sell_temp where Product_Id=?");
 
         mystat.setString(1,id);
 
@@ -247,6 +290,8 @@ public class SellController implements Initializable {
          } catch (SQLException ex) {
              System.err.println(ex);
          }
+         
+        total();
 }
     
     
@@ -255,7 +300,7 @@ public class SellController implements Initializable {
          try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","12345");
          //Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
         PreparedStatement mystatement=null ;
-        mystatement = myconn.prepareStatement("select Amount, VAT, Discount from sell_temp where ProductID=?");
+        mystatement = myconn.prepareStatement("select Amount, VAT, Discount from sell_temp where Product_Id=?");
         mystatement.setString(1,id);
         
         ResultSet rs = mystatement.executeQuery();
@@ -288,14 +333,35 @@ public class SellController implements Initializable {
             System.err.println(ex);
         }
 }
+    
+    private void delete_tempTable(){
+     
+        try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","12345");
+        //Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+        
+         
+        PreparedStatement mystat=null ;
+
+        mystat = myconn.prepareStatement("delete from sell_temp");
+        mystat.executeUpdate();
+
+         } catch (SQLException ex) {
+             System.err.println(ex);
+         }
+        
+        
+    }
  
     
-    @FXML
-    private void total(ActionEvent event) throws Exception {
+ 
+    public void total(){
         
-        net_bill=subtotal-total_discount;
+        //net_bill=subtotal-total_discount;
+        net_bill=subtotal-total_discount+totalVAT;
         
         String subt = Float.toString(subtotal);
+        
+        String tVAT = Float.toString(totalVAT);
        
         String dcount = Float.toString(total_discount);
         
@@ -306,12 +372,119 @@ public class SellController implements Initializable {
         label_subtotal.setText(subt);
         label_discount.setText(dcount);
         label_netbill.setText(nbill);
+        label_vat.setText(tVAT);
     
+    }
+    
+    
+    @FXML
+    private void Confirm(ActionEvent event) throws Exception {
+        
+       try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","12345");
+         //Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","p123456");
+         
+     
+        
+       Statement mystat=myconn.createStatement();
+       int r = mystat.executeUpdate("insert into sales_report select * from sell_temp");
+       
+       if(r==0){
+       System.out.println("Not affected");
+       }
+       else{
+           System.out.println("Affected");
+       }
+      
+       
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    
+    }
+    
+    @FXML
+     private void receipt(ActionEvent event) throws IOException{
+         
+        /* Calendar timer=Calendar.getInstance();
+     
+      SimpleDateFormat tTime= new SimpleDateFormat("HH:mm:ss a");
+     // tTime.format(timer.getTime());
+      
+        SimpleDateFormat Tdate= new SimpleDateFormat("dd-MMM-yyyy");
+          Stage primarystage=new Stage(); 
+       FileChooser fileChooser = new FileChooser();
+  
+              //Set extension filter
+              FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files", "*.pdf");
+              fileChooser.getExtensionFilters().add(extFilter);
+              
+              //Show save file dialog
+              File file = fileChooser.showSaveDialog(primarystage);
+              
+               final String receipt = "Enterprise Solution\n + \n Money Receipt"+"\nDate:"+Tdate.format(timer.getTime())+"\t\t\t\t\t\t\t\tTime:"+ tTime.format(timer.getTime())+"\n\n\t\t\t\t\t\tThank you";
+              
+              if(file != null){
+                  SaveFile(receipt, file);
+              }
+              // Node node = new Circle(100, 200, 200);
+            PrinterJob job = PrinterJob.createPrinterJob();
+            if (job != null && job.showPrintDialog(NewAP.getScene().getWindow())){
+            boolean success = job.printPage(NewAP);
+            if (success) {
+              job.endJob();
+         
+    }
+}*/             
+                
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Recpt.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                
+                
+                ReceiptController controller = fxmlLoader.<ReceiptController>getController();
+                controller.Cname(cust_name.getText(), subtotal, totalVAT, total_discount, net_bill);
+                
+                
+                Stage stage = new Stage();
+                
+                stage.setTitle("Invoice");
+        
+                Image micon = new Image("/bag4.png");
+                stage.getIcons().add(micon);
+                
+                
+                
+                
+                //rc.Cname("Munzir");
+                
+                
+                
+                stage.setScene(new Scene(root1));  
+                
+                //stage.setResizable(false);
+                stage.show();
+                
+                System.out.println("5");
+                
+                controller.print();
+     
+     }
+    
+    
+ private void SaveFile(String content, File file){
+        try {
+            FileWriter fileWriter = null;
+             
+            fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+            fileWriter.close();
+        } catch (IOException ex) {
+            
+        }
+         
     }
    
     
     public void showtemptable() {
-        // TODO
           
        
         try{ Connection myconn= DriverManager.getConnection("jdbc:mysql://localhost:3306/head_office","root","12345");
@@ -322,7 +495,7 @@ public class SellController implements Initializable {
       
        while (rs.next()) {
               
-                 data.add(new temptable(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getFloat(5), rs.getFloat(6), rs.getFloat(7))); 
+                 data.add(new temptable(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getFloat(6), rs.getInt(7), rs.getFloat(8), rs.getFloat(9), rs.getFloat(10),rs.getFloat(11))); 
             }
 
         } catch (SQLException ex) {
@@ -331,10 +504,10 @@ public class SellController implements Initializable {
         
         //Set cell value factory to tableview.
         //NB.PropertyValue Factory must be the same with the one set in model class.
-        col1.setCellValueFactory(new PropertyValueFactory<>("ProductID"));
-        col2.setCellValueFactory(new PropertyValueFactory<>("Productname"));
+        col1.setCellValueFactory(new PropertyValueFactory<>("Product_Id"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("Product_Name"));
         col3.setCellValueFactory(new PropertyValueFactory<>("Unit_Price"));
-        col4.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("Qty"));
         col5.setCellValueFactory(new PropertyValueFactory<>("Amount"));
         col6.setCellValueFactory(new PropertyValueFactory<>("VAT"));
         col7.setCellValueFactory(new PropertyValueFactory<>("Discount"));
@@ -345,6 +518,7 @@ public class SellController implements Initializable {
         
         System.out.println("hello12");
     } 
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -362,13 +536,17 @@ public class SellController implements Initializable {
            String p_name = rs.getString("Productname");
            proName.add(p_name);
         }
+        mystat.close();
        
         } catch (SQLException ex) {
             System.err.println(ex);
         }
          
+        delete_tempTable();
+         
          
        TextFields.bindAutoCompletion(pro_text, proName);
+       
        
        
     }  
